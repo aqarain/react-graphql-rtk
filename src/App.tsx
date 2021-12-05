@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from '@emotion/styled';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { Profile } from './pages/Profile';
+import { SearchResult } from './pages/SearchResult';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+	return (
+		<Container>
+			<BrowserRouter>
+				<Switch>
+					<Route path="/" exact>
+						<Home />
+					</Route>
+					<Route path="/page/:pageNumber" exact>
+						<Home />
+					</Route>
+					<Route path="/profile/:characterId" exact>
+						<Profile />
+					</Route>
+					<Route path="/search" exact>
+						<SearchResult />
+					</Route>
+					<Redirect to="/" />
+				</Switch>
+			</BrowserRouter>
+		</Container>
+	);
 }
 
-export default App;
+const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+`;
